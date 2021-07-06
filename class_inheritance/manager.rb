@@ -1,6 +1,8 @@
 require_relative 'employee'
+
 class Manager < Employee
-    def initialize()
+    def initialize(name,title,salary,boss)
+        super 
         @employees = []
     end
 
@@ -10,5 +12,13 @@ class Manager < Employee
         end
         sum*multiplier
     end
+
+    def hire(employee)
+        @employees << employee
+    end
     
 end
+
+
+ned = Manager.new("Ned", "Founder", 1000000)
+darren = Manager.new("Darren", "TA Manager", 78000, "Ned")
