@@ -23,11 +23,43 @@ module Slideable
 
     def moves
         moves = [] 
-        #we shovel in all moves within the board bounds given a pieces current positon
-        #lets say if piece is at [0,0]
-        if Piece.move_dirs == horizontal
-
+        if Piece.move_dirs == :horizontal #check if piece is the right instance we should be calling on!
+            #go left
+            position = Piece.pos
+            left_pos = position + horizontal_dirs[0]
+            while left_pos.empty? && #outof bounds
+                moves << left_pos
+                left_pos += horizontal_dirs[0]
+            end       
+    end
+    
+    def grow_unblocked_moves_in_dir(dx,dy)
     end
 
     
 end
+
+
+
+        #     #go right
+        #     position = Piece.pos
+        #     right_pos = position + horizontal_dirs[1]
+        #     while right_pos.empty? && #outof bounds
+        #         moves << right_pos
+        #         right_pos += horizontal_dirs[1]
+        #     end
+        #     #go up
+        #     position = Piece.pos
+        #     up_pos = position + horizontal_dirs[2]
+        #     while up_pos.empty? && #outof bounds
+        #         moves << up_pos
+        #         up_pos += horizontal_dirs[2]
+        #     end
+        #     #down
+        #     position = Piece.pos
+        #     down_pos = position + horizontal_dirs[3]
+        #     while down_pos.empty? && #outof bounds
+        #         moves << down_pos
+        #         down_pos += horizontal_dirs[3]
+        #     end
+        # elsif Piece.move_dirs == :diagonal
