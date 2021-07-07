@@ -23,17 +23,23 @@ module Slideable
 
     def moves
         moves = [] 
-        if Piece.move_dirs == :horizontal #check if piece is the right instance we should be calling on!
+        if move_dirs == :horizontal #check if piece is the right instance we should be calling on!
             #go left
-            position = Piece.pos
-            left_pos = position + horizontal_dirs[0]
-            while left_pos.empty? && #outof bounds
-                moves << left_pos
-                left_pos += horizontal_dirs[0]
-            end       
+            # position = Piece.pos
+            row, col = pos
+            # left_pos = position + horizontal_dirs[0]
+            # row, col = position + horizontal_dirs[0] #works???
+             grow_unblocked_moves_in_dir(row, col)
+
+            # while left_pos.empty? && #outof bounds
+            #     moves << left_pos
+            #     left_pos += horizontal_dirs[0]
+            # end       
     end
     
     def grow_unblocked_moves_in_dir(dx,dy)
+        moves = []
+
     end
 
     

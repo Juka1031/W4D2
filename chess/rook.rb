@@ -13,6 +13,6 @@ include Slideable
     private 
 
     def move_dirs
-        "horizontal"
+        horizontal_dirs
     end
 end
