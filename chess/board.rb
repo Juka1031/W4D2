@@ -12,18 +12,25 @@ class Board
     attr_reader :rows
 
     def initialize
-        @rows = Array.new(8) #{ Array.new(8) {Piece.new} } 
+        @rows = Array.new(8) { Array.new(8) }
         #iterate through each element if idx is 0,1,6,7 fill it with pieces, all others are nill piece
-        @rows.each_with_index do |row,idx1|
-            if (2..5).to_a.include?(idx1) #filled the center with nil pieces
-                @rows[idx1] = Array.new(8) {NullPiece.new}
-            elsif [1].include?(idx1) #fill pawns
-                @rows[idx1] = Array.new(8) {Pawn.new(:B, "empty", [idx1])}
+        pieces = [Rook,Knight,Bishop,Queen,King,Bishop,Knight,Rook]
+        (0...@rows.length).each do |row|
+            (0...@rows.length).each do |col|
+                if (2..5).to_a.include?(row) #filled the center with nil pieces
+                    @rows[row][col] = NullPiece.new(nil,"board",[row,col]) 
+                elsif [1].include?(row) #fill pawns
+                    @rows[row][col] = Pawn.new(:B,"board",[row,col])
+                elsif [6].include?(row) #fill pawns
+                    @rows[row][col] = Pawn.new(:W,"board",[row,col])
+                elsif [7].include?(row) #fill pawns
+                    @rows[row][col] = pieces[col].new(:W,"board",[row,col])
+                elsif [0]
+                    @rows[row][col] = pieces[col].new(:B,"board",[row,col])
+                end
             end
         end
-        
-        @rows[7] = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
-        @rows[0] = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
+
     end
 
     def [](pos)
@@ -45,6 +52,6 @@ class Board
         # end
 
         self[end_pos] = self[start_pos]
-        self[start_pos] = NullPiece.new #empty becomes a null piece
+        self[start_pos] = NullPiece.new(nil,"board", start_pos) #empty becomes a null piece
     end
 end

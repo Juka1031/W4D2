@@ -1,6 +1,6 @@
 require_relative "piece"
 class King < Piece
-    def initialize
+    def initialize(color,board,pos)
         super
     end
 end
