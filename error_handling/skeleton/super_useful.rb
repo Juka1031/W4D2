@@ -1,3 +1,5 @@
+class WrongFoodError < StandardError; end
+
 # PHASE 1
 def convert_to_int(str)
     begin
@@ -14,17 +16,24 @@ def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
     puts "OMG, thanks so much for the #{maybe_fruit}!"
   else 
-    raise StandardError 
+    raise WrongFoodError
   end 
+  # rescue StandardError
+    # retry 
 end
 
 def feed_me_a_fruit
+  begin  
+
   puts "Hello, I am a friendly monster. :)"
 
   puts "Feed me a fruit! (Enter the name of a fruit:)"
-
-  maybe_fruit = gets.chomp
-  reaction(maybe_fruit) 
+    maybe_fruit = gets.chomp
+    raise WrongFoodError.new("Give me a coffee!!!") unless maybe_fruit == "coffee"
+  rescue WrongFoodError
+    retry 
+    reaction(maybe_fruit)
+  end 
 end  
 
 # PHASE 3
