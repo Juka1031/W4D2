@@ -64,7 +64,7 @@ module Slideable
             next_pos = [row + dx, col + dy]
         end 
 
-
+        moves 
     end
 
     
