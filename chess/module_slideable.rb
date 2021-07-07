@@ -21,10 +21,18 @@ module Slideable
         DIAGONAL_DIRS
     end
 
+
+
     def moves
         moves = [] 
-        if move_dirs == :horizontal #check if piece is the right instance we should be calling on!
+        #check if piece is the right instance we should be calling on!
             #go left
+        move_dirs.each do |dir|
+            row, col = dir 
+            grow_unblocked_moves_in_dir(row, col)
+        end
+            
+
             # position = Piece.pos
             row, col = pos
             # left_pos = position + horizontal_dirs[0]
@@ -37,8 +45,25 @@ module Slideable
             # end       
     end
     
+    private 
+
+    def move_dirs
+        raise NotImplemented
+    end
+
     def grow_unblocked_moves_in_dir(dx,dy)
+        #check position is valid or not 
+        #check current pos with future pos
         moves = []
+        row, col = self.pos # is this right? or Piece or something else  
+        next_pos = [row + dx, col + dy]
+
+        while next_pos.valid_moves?    
+            moves << next_pos
+            row, col = moves.last
+            next_pos = [row + dx, col + dy]
+        end 
+
 
     end
 
