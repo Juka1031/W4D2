@@ -46,8 +46,10 @@ module Slideable
         row, col = self.pos # is this right? or Piece or something else  
         initial_color = self.color
         next_pos = [row + dx, col + dy]
-        while next_pos.valid_moves? #check if its in bound
-            if @board[next_pos] == NullPiece #its empty you may proceed    
+
+
+        while next_pos.all? { |cor| (0..7).include?(cor)} #check if its in bound
+            if @board[next_pos].is_a?(NullPiece) #its empty you may proceed    
                 moves << next_pos
                 row, col = moves.last
                 next_pos = [row + dx, col + dy]
