@@ -3,6 +3,7 @@ require_relative "piece"
 class Board
     def initialize
         @rows = Array.new(8) { Array.new(8) {Piece.new} } #parameters))} #Piece.new correct?
+        
     end
 
     def [](pos)
