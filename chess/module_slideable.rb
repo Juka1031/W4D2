@@ -38,13 +38,14 @@ module Slideable
     def move_dirs
         raise NotImplemented
     end
-
+    require "byebug"
     def grow_unblocked_moves_in_dir(dx,dy)
         #check position is valid or not 
         #check current pos with future pos
         moves = []
         row, col = self.pos # is this right? or Piece or something else  
         initial_color = self.color
+        debugger
         next_pos = [row + dx, col + dy]
 
 

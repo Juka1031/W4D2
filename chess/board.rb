@@ -7,18 +7,21 @@ require_relative "rook"
 require_relative "bishop"
 require_relative "knight"
 
-
 class Board
+
+    attr_reader :rows
+
     def initialize
         @rows = Array.new(8) #{ Array.new(8) {Piece.new} } 
         #iterate through each element if idx is 0,1,6,7 fill it with pieces, all others are nill piece
         @rows.each_with_index do |row,idx1|
             if (2..5).to_a.include?(idx1) #filled the center with nil pieces
                 @rows[idx1] = Array.new(8) {NullPiece.new}
-            elsif [1,6].include?(idx1) #fill pawns
-                @rows[idx1] = Array.new(8) {Pawn.new}
+            elsif [1].include?(idx1) #fill pawns
+                @rows[idx1] = Array.new(8) {Pawn.new(:B, "empty", [idx1])}
             end
         end
+        
         @rows[7] = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
         @rows[0] = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
     end
