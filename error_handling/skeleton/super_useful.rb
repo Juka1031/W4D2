@@ -1,4 +1,5 @@
 class WrongFoodError < StandardError; end
+class YearsKnownError < StandardError; end
 
 # PHASE 1
 def convert_to_int(str)
@@ -16,32 +17,37 @@ def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
     puts "OMG, thanks so much for the #{maybe_fruit}!"
   else 
-    raise WrongFoodError
+    raise StandardError
   end 
   # rescue StandardError
     # retry 
 end
 
 def feed_me_a_fruit
-  begin  
+  
 
   puts "Hello, I am a friendly monster. :)"
 
   puts "Feed me a fruit! (Enter the name of a fruit:)"
+  begin  
     maybe_fruit = gets.chomp
-    raise WrongFoodError.new("Give me a coffee!!!") unless maybe_fruit == "coffee"
+    raise WrongFoodError.new(puts "Give me a coffee!!!") unless maybe_fruit == "coffee"
   rescue WrongFoodError
     retry 
+  
     reaction(maybe_fruit)
-  end 
+    end
 end  
 
 # PHASE 3
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
     @name = name
+    raise YearsKnownError.new (puts "You have no name") if name.length <= 0
     @yrs_known = yrs_known
+    raise YearsKnownError.new(puts "Must be 5 or more") unless yrs_known >= 5
     @fav_pastime = fav_pastime
+    raise YearsKnownError.new (puts "You have no pastime") if fav_pastime.length <= 0
   end
 
   def talk_about_friendship
